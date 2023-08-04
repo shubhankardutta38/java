@@ -1,0 +1,335 @@
+*********************************************************************************************************************************************
+Palindrome
+
+import java.util.Scanner;
+public class Palindrome {
+    public static void main(String[] args) {
+        int num;
+        System.out.println("Enter a number: ");
+        Scanner sc = new Scanner(System.in);
+        num = sc.nextInt();
+        int temp = num;
+        int rev = 0;
+        while (temp != 0) {
+            int digit = temp % 10;
+            rev = rev * 10 + digit;
+            temp /= 10;
+        }
+        if (num == rev) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not Palindrome");
+        }
+        sc.close();
+
+    }
+}
+*********************************************************************************************************************************************
+Polymorphism
+
+class Math {
+    public int add(int a, int b) {
+        return a + b;
+    }
+    public double add(double a, double b) {
+        return a + b;
+    }
+    public double multiply(double a, double b) {
+        return a * b;
+    }
+    public double sub(int a, int b) {
+        return a - b;
+    }
+}
+
+public class Polymorphism {
+    public static void main(String[] args) {
+        Math math = new Math();
+
+        int result1 = math.add(2, 3); // This will call the first add method
+        double result2 = math.add(2.5, 3.5); // This will call the second add method
+        double resule3 = math.multiply(2.1, 1.4); // This will call the multiply method
+        double result4 = math.sub(5, 3); // This will call the sub method
+        System.out.println(result1);
+        System.out.println(result2);
+        System.out.println(resule3);
+        System.out.println(result4);
+    }
+}
+*********************************************************************************************************************************************
+inheritance
+
+class dog {
+    void dogSound() {
+        System.out.println("Woof");
+    }
+}
+
+class cat extends dog {
+    void catSound() {
+        System.out.println("Meow");
+    }
+}
+
+public class inheritance {
+    public static void main(String[] args) {
+        cat c = new cat();
+        c.dogSound();
+        c.catSound();
+    }
+}
+
+*********************************************************************************************************************************************
+
+public class patt {
+    public static void main(String[] args) {
+        int n = 5;
+        for (int i = 1; i <= n; i++) {
+            // Print spaces before the stars to center the triangle
+            for (int k = n - i; k >= 1; k--) {
+                System.out.print(" ");
+            }
+
+            // Print stars for each row
+            for (int j = 1; j <= 2 * i - 1; j++) {
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+*********************************************************************************************************************************************
+
+
+import java.util.*;
+
+public class HospitalSpeciality {
+    public static void main(String[] args) {
+        List<String> patientDetails1 = Arrays.asList("101", "P", "102", "O", "302", "P", "305", "P");
+        List<String> patientDetails2 = Arrays.asList("101", "O", "102", "O", "302", "P", "305", "E", "401", "O", "656", "O");
+        List<String> patientDetails3 = Arrays.asList("101", "O", "102", "E", "302", "P", "305", "P", "401", "E", "656", "O", "987", "E");
+
+        Map<String, String> specialities = getSpecialities();
+        System.out.println("Most visited speciality: " + findMaxVisitedSpeciality(patientDetails1, specialities)); // Output: Pediatrics
+        System.out.println("Most visited speciality: " + findMaxVisitedSpeciality(patientDetails2, specialities)); // Output: Orthopedics
+        System.out.println("Most visited speciality: " + findMaxVisitedSpeciality(patientDetails3, specialities)); // Output: ENT
+    }
+
+    public static Map<String, String> getSpecialities() {
+        // Create and return the dictionary of medical specialities
+        Map<String, String> specialities = new HashMap<>();
+        specialities.put("P", "Pediatrics");
+        specialities.put("O", "Orthopedics");
+        specialities.put("E", "ENT");
+        return specialities;
+    }
+
+    public static String findMaxVisitedSpeciality(List<String> patientDetails, Map<String, String> specialities) {
+        // Count the occurrences of each medical specialty using a HashMap
+        Map<String, Integer> specialtyCount = new HashMap<>();
+        for (int i = 1; i < patientDetails.size(); i += 2) {
+            String specialtyCode = patientDetails.get(i);
+            specialtyCount.put(specialtyCode, specialtyCount.getOrDefault(specialtyCode, 0) + 1);
+        }
+
+        // Find the medical specialty with the maximum patient count
+        int maxCount = 0;
+        String maxSpeciality = "";
+        for (String specialtyCode : specialtyCount.keySet()) {
+            int count = specialtyCount.get(specialtyCode);
+            if (count > maxCount) {
+                maxCount = count;
+                maxSpeciality = specialities.get(specialtyCode);
+            }
+        }
+
+        return maxSpeciality;
+    }
+}
+*********************************************************************************************************************************************
+import java.util.*;
+
+public class q1 {
+    public static void main(String[] args) {
+        int[] input1 = {23, 34, 55};
+        int[] input2 = {33, 44, 55, 34, 88};
+
+        System.out.println("Largest number from input1: " + create_largest_number(input1)); 
+        System.out.println("Largest number from input2: " + create_largest_number(input2)); 
+    }
+
+    public static String create_largest_number(int[] numbers) {
+        // Convert the integers to strings for custom sorting
+        String[] numStrings = new String[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            numStrings[i] = Integer.toString(numbers[i]);
+        }
+
+        // Custom comparator to sort the numbers in decreasing order of their concatenated values
+        Arrays.sort(numStrings, new Comparator<String>() {
+            @Override
+            public int compare(String a, String b) {
+                String ab = a + b;
+                String ba = b + a;
+                return ba.compareTo(ab); // Sort in reverse order
+            }
+        });
+
+        // Concatenate the sorted strings to get the largest number
+        StringBuilder largestNumberBuilder = new StringBuilder();
+        for (String numString : numStrings) {
+            largestNumberBuilder.append(numString);
+        }
+
+        return largestNumberBuilder.toString();
+    }
+}
+************************************************************************************************************************************************************
+
+public class q2 {
+    public static void main(String[] args) {
+        int input1 = 99;
+        int input2 = 1221;
+
+        System.out.println("Nearest palindrome greater than " + input1 + ": " + nearest_palindrome(input1)); // Output: 101
+        System.out.println("Nearest palindrome greater than " + input2 + ": " + nearest_palindrome(input2)); // Output: 1331
+    }
+
+    public static int nearest_palindrome(int num) {
+        int nearestGreaterPalindrome = num + 1;
+        while (!isPalindrome(nearestGreaterPalindrome)) {
+            nearestGreaterPalindrome++;
+        }
+        return nearestGreaterPalindrome;
+    }
+
+    public static boolean isPalindrome(int num) {
+        String numString = Integer.toString(num);
+        int left = 0;
+        int right = numString.length() - 1;
+        while (left < right) {
+            if (numString.charAt(left) != numString.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+
+************************************************************************************************************************************************************
+
+import java.util.Arrays;
+public class q3 {
+    public static void main(String[] args) {
+        int number1 = 125;
+        int number2 = 251;
+
+        System.out.println(check_double(number1)); // Output: true
+        System.out.println(check_double(number2)); // Output: true
+    }
+
+    public static boolean check_double(int number) {
+        String numString = Integer.toString(number);
+        String doubleNumString = Integer.toString(number * 2);
+
+        if (numString.length() != doubleNumString.length()) {
+            return false;
+        }
+
+        char[] numDigits = numString.toCharArray();
+        char[] doubleNumDigits = doubleNumString.toCharArray();
+        Arrays.sort(numDigits);
+        Arrays.sort(doubleNumDigits);
+
+        return Arrays.equals(numDigits, doubleNumDigits);
+    }
+}
+
+************************************************************************************************************************************************************
+
+import java.util.Scanner;
+
+public class q1 {
+    public static void main(String[] args) {
+        int[] a = new int[3];
+        int res = 1;
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Enter three positive integer values separated by spaces:");
+        for (int i = 0; i < 3; i++) {
+            a[i] = sc.nextInt();
+        }
+        
+        boolean foundSeven = false;
+        for (int i = 0; i < 3; i++) {
+            if (a[i] == 7) {
+                foundSeven = true;
+                break;
+            }
+        }
+        
+        if (foundSeven) {
+            boolean exclude = false;
+            for (int i = 0; i < 3; i++) {
+                if (a[i] == 7) {
+                    exclude = true;
+                }
+                if (!exclude) {
+                    res *= a[i];
+                }
+            }
+            
+            if (res == 1) {
+                System.out.println(-1);
+            } else {
+                System.out.println(res);
+            }
+        } else {
+            for (int i = 0; i < 3; i++) {
+                res *= a[i];
+            }
+            System.out.println(res);
+        }
+        sc.close();
+    }
+}
+
+************************************************************************************************************************************************************
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class q5 {
+    public static List<Integer> countUpperCaseLowerCase(String sentence) {
+        int upperCaseCount = 0;
+        int lowerCaseCount = 0;
+
+        for (char c : sentence.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                upperCaseCount++;
+            } else if (Character.isLowerCase(c)) {
+                lowerCaseCount++;
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        result.add(upperCaseCount);
+        result.add(lowerCaseCount);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String input1 = "Hello world!";
+        String input2 = "Welcome to Mysore";
+
+        List<Integer> output1 = countUpperCaseLowerCase(input1);
+        List<Integer> output2 = countUpperCaseLowerCase(input2);
+
+        System.out.println("Input: " + input1 + ", Output: " + output1); // Output: [1, 9]
+        System.out.println("Input: " + input2 + ", Output: " + output2); // Output: [2, 13]
+    }
+}
